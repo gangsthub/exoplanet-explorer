@@ -34,7 +34,8 @@ Instructions:
     Return the fetch.
 
     Your code goes here!
-     */
+    */
+    return fetch(url)
   }
 
   /**
@@ -48,6 +49,7 @@ Instructions:
 
     Your code goes here!
      */
+    return get(url).then(response => response.json())
   }
 
   window.addEventListener('WebComponentsReady', function() {
@@ -58,6 +60,8 @@ Instructions:
 
     Your code goes here too!
      */
-    // getJSON('../data/earth-like-results.json')
+    getJSON('../data/earth-like-results.json')
+      .then(response => addSearchHeader(response.query))
+      .catch(addSearchHeader('unknown'))
   });
 })(document);
