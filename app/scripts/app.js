@@ -61,7 +61,13 @@ Instructions:
     Your code goes here too!
      */
     getJSON('../data/earth-like-results.json')
-      .then(response => addSearchHeader(response.query))
-      .catch(addSearchHeader('unknown'))
+      .then(response => {
+        console.log(response)
+        addSearchHeader(response.query)
+      })
+      .catch((err) => {
+        console.log(err)
+        addSearchHeader('unknown')
+      })
   });
 })(document);
