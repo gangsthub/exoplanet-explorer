@@ -54,6 +54,10 @@ Hint: you'll probably still need to use .map.
     });
   }
 
+  function getJSONAndCreateThumb(url) {
+    return getJSON(url).then(createPlanetThumb)
+  }
+
   window.addEventListener('WebComponentsReady', function() {
     home = document.querySelector('section[data-route="home"]');
     /*
@@ -62,10 +66,7 @@ Hint: you'll probably still need to use .map.
     getJSON('../data/earth-like-results.json')
       .then(function(response) {
         addSearchHeader(response.query);
-        return Promise.all(response.results.map(getJSON));
-      })
-      .then(res => {
-        res.forEach(createPlanetThumb)
+        response.results.map(getJSONAndCreateThumb)
       })
   });
 })(document);
