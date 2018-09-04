@@ -72,9 +72,13 @@ Instructions:
       })
       .then(response => {
         addSearchHeader(response.query)
-        return response.results[0]
+        return getJSON(response.results[0])
       })
-      .then(getJSON)
+      .catch(err => {
+        console.log(err)
+        addSearchHeader('unknown')
+        throw new Error('Planet not found')
+      })
       .then(response => {
         createPlanetThumb(response)
       })
